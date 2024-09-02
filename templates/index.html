@@ -132,7 +132,7 @@
             <h1 class="text-2xl	text-center text-white">RESULT</h1>
             <div class="md:mx-8  md:flex md:items-center md:space-x-4">
                 <div class="m-2 md:py-4 md:w-1/2 w- flex justify-center border-dashed border-2 rounded-lg">
-                    <img id="my-image" class="md:w-1/2" src="{{ url_for('display_img',filename=filename) }}"
+                    <img id="my-image" class="md:w-1/2" src="{{ url_for('static',filename=filename) }}"
                         style="height: 500px; width:500px; border-radius: 5rem;" alt="">
                 </div>
                 <div class="text-justify px-5 text-[#bfe3ff] md:w-2/3 ">
@@ -228,7 +228,7 @@
     <!------------------------------------------------------------------ Preview Image  ---------------------------------------------------->
     <div for="preview" id="popup" class="hidden fixed left-0 top-1/2 w-full h-full z-10 ">
         <div class="flex justify-center items-center">
-            <img id="my-image" src="{{ url_for('display_img',filename=filename) }} "
+            <img id="my-image" src="{{ url_for('static',filename=filename) }}"
                 class="absolute px-5 md:px-0 md:w-1/2 left-0 top-0 md:translate-x-2/4 -translate-y-2/4 object-cover "
                 alt="">
         </div>

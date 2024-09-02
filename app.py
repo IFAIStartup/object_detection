@@ -12,7 +12,7 @@ from ultralytics import YOLO
 
 app = Flask(__name__)
 app.secret_key = 'hf7TZttb5L'
-
+app.config['UPLOAD_FOLDER']= 'static/uploads/'
 
 
 
@@ -26,18 +26,14 @@ def predict_img():
         if 'file' in request.files:
             f = request.files['file']
             if f and allowed_file(f.filename):
-                unique_filename = str(uuid.uuid4()) + '_' + secure_filename(f.filename)
-                filename = secure_filename(unique_filename) 
-                base_path = os.path.dirname(__file__)
-                file_path=os.path.join(base_path,'uploads',filename)
-                print("upload folder is:",file_path)
-                f.save(file_path)
-                if filename:
+                filename="image.png"
+                filepath=(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+                f.save(filepath)
+                if filename=='image.png':
                     flash("Image upload sucessfully",'success')
-                global imgpath
-                predict_img.imgpath=filename
                 model=YOLO('best.pt')
-                results=model.predict("/opt/render/project/src/bus.jpg", save=True ,project="static", name="predict", exist_ok=True,show=True)
+                results=model.predict(filepath, save=True ,project="static", name="predict", exist_ok=True,show=True)
+                filename='predict'+'/'+filename
                 counts={}
                 for results in results:
                     boxes =results.boxes.cpu().numpy()
@@ -61,10 +57,7 @@ def predict_img():
             redirect(request.url)
     return render_template("index.html")
 
-@app.route('/display/<filename>')
-def display_img(filename):
-    return redirect(url_for('static',filename='predict/' + filename), code=301)
 
 if __name__=="__main__":
-    app.run(port=10000)
+    app.run(port=10000,debug=True)
               
