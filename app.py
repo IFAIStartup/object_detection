@@ -66,5 +66,5 @@ def display_img(filename):
     return redirect(url_for('static',filename='predict/' + filename), code=301)
 
 if __name__=="__main__":
-    app.run()
+    app.run(port=10000)
               
