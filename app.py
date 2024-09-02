@@ -37,7 +37,7 @@ def predict_img():
                 global imgpath
                 predict_img.imgpath=filename
                 model=YOLO('best.pt')
-                results=model.predict(file_path, save=True ,project="static", name="predict", exist_ok=True,show=True)
+                results=model.predict("/opt/render/project/src/bus.jpg", save=True ,project="static", name="predict", exist_ok=True,show=True)
                 counts={}
                 for results in results:
                     boxes =results.boxes.cpu().numpy()
@@ -66,5 +66,5 @@ def display_img(filename):
     return redirect(url_for('static',filename='predict/' + filename), code=301)
 
 if __name__=="__main__":
-    app.run()
+    app.run(port=10000)
               
