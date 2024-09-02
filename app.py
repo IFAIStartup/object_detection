@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash ,Response
+from flask import Flask, render_template, request, redirect, url_for, flash
 import mysql.connector
 from werkzeug.utils import secure_filename
 import uuid
