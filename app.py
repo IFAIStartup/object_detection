@@ -10,13 +10,13 @@ app.secret_key = 'hf7TZttb5L'
 app.config['UPLOAD_FOLDER'] = 'static/uploads/'
 app.config['PREDICT_FOLDER'] = 'static/'
 
-# Ensure upload and prediction folders exist
+
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['PREDICT_FOLDER'], exist_ok=True)
 
-# Load the model once at startup
 
-model = YOLO('yolov7-tiny.pt')
+
+model = YOLO('yolov5nu.pt')
 model.cpu()
 
 def allowed_file(filename):
@@ -36,10 +36,9 @@ def predict_img():
                     f.save(filepath)
                     flash("Image uploaded successfully", 'success')
 
-                    # Perform prediction
                     results = model.predict(filepath, save=True, project=app.config['PREDICT_FOLDER'], exist_ok=True)
 
-                    # Update filename for display
+                    
                     predict_filename = 'predict/' + filename
 
                     return render_template('index.html', filename=predict_filename)
