@@ -33,7 +33,7 @@ def predict_img():
                 if filename=='image.png':
                     flash("Image upload sucessfully",'success')
                 model=YOLO('best.pt')
-                model.predict(file_path,save='True', project='static',name='predict',exist_ok=True)
+                model.predict('static/uploads/image.png',save='True', project='static', exist_ok=True)
                 filename='predict'+'/'+filename
             
                 
