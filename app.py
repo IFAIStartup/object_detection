@@ -16,7 +16,7 @@ os.makedirs(app.config['PREDICT_FOLDER'], exist_ok=True)
 
 # Load the model once at startup
 
-model = YOLO('yolov8-tiny.pt')
+model = YOLO('yolov7-tiny.pt')
 model.cpu()
 
 def allowed_file(filename):
