@@ -13,7 +13,7 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['PREDICT_FOLDER'], exist_ok=True)
 
 # Load the model once at startup
-model = YOLO('yolov5s.pt')
+model = YOLO('yolov5n.pt')
 
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'mp4'}
