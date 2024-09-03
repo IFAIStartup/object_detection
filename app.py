@@ -30,7 +30,7 @@ def predict_img():
         if 'file' in request.files:
             f = request.files['file']
             if f and allowed_file(f.filename):
-                filename = secure_filename('image.png')
+                filename = secure_filename(f.filename)
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 
                 try:
