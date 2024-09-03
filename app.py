@@ -39,11 +39,23 @@ def predict_img():
                     image=Image.open(filepath)
                     image=image.resize((260,260))
                     results = model.predict(image, save=True, project=app.config['PREDICT_FOLDER'], exist_ok=True)
-
-                    
                     predict_filename = 'predict/' + filename
+                    counts={}
+                    for results in results:
+                        boxes =results.boxes.cpu().numpy()
+                        for box in boxes:
+                         cls=int(box.cls[0])
+                        if not cls in counts.keys():
+                            counts[cls]=1
+                        else:
+                            counts[cls]+=1
+                    label=[]
+                    count=[]
+                    for key in counts.keys():
+                       label.append(model.names[key])
+                       count.append(str(counts[key]))
 
-                    return render_template('index.html', filename=predict_filename)
+                    return render_template('index.html', filename=predict_filename,label=label,count=count)
                 except Exception as e:
                     flash(f'Error occurred: {str(e)}', 'error')
                     return redirect(request.url)
