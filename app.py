@@ -49,11 +49,11 @@ def predict_img():
                                 counts[cls]=1
                             else:
                                 counts[cls]+=1
-                       label=[]
-                       count=[]
-                       for key in counts.keys():
-                           label.append(model.names[key])
-                           count.append(str(counts[key]))
+                        label=[]
+                        count=[]
+                        for key in counts.keys():
+                            label.append(model.names[key])
+                            count.append(str(counts[key]))
 
                     return render_template('index.html', filename=predict_filename,label=label,count=count)
                 except Exception as e:
