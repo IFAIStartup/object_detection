@@ -6,14 +6,14 @@ from ultralytics import YOLO
 app = Flask(__name__)
 app.secret_key = 'hf7TZttb5L'
 app.config['UPLOAD_FOLDER'] = 'static/uploads/'
-app.config['PREDICT_FOLDER'] = 'static/predict/'
+app.config['PREDICT_FOLDER'] = 'static/'
 
 # Ensure upload and prediction folders exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['PREDICT_FOLDER'], exist_ok=True)
 
 # Load the model once at startup
-model = YOLO('best.pt')
+model = YOLO('yolov5s.pt')
 
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'mp4'}
@@ -36,9 +36,9 @@ def predict_img():
                     results = model.predict(filepath, save=True, project=app.config['PREDICT_FOLDER'], exist_ok=True)
 
                     # Update filename for display
-                    filename = 'predict/' + filename
+                    predict_filename = 'predict/' + filename
 
-                    return render_template('index.html', filename=filename)
+                    return render_template('index.html', filename=predict_filename)
                 except Exception as e:
                     flash(f'Error occurred: {str(e)}', 'error')
                     return redirect(request.url)
