@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 from werkzeug.utils import secure_filename
 from ultralytics import YOLO
+from PIL import Image
 import torch
 torch.cuda.empty_cache()
 
@@ -35,8 +36,9 @@ def predict_img():
                 try:
                     f.save(filepath)
                     flash("Image uploaded successfully", 'success')
-
-                    results = model.predict(filepath, save=True, project=app.config['PREDICT_FOLDER'], exist_ok=True)
+                    image=Image.open(filepath)
+                    image=image.resize((260,260))
+                    results = model.predict(image, save=True, project=app.config['PREDICT_FOLDER'], exist_ok=True)
 
                     
                     predict_filename = 'predict/' + filename
