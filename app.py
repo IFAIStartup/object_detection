@@ -29,10 +29,12 @@ def predict_img():
                 filename="image.png"
                 filepath=(os.path.join(app.config['UPLOAD_FOLDER'],filename))
                 f.save(filepath)
+                print("upload folder:",filepath)
                 if filename=='image.png':
                     flash("Image upload sucessfully",'success')
                 model=YOLO('best.pt')
                 results=model.predict(filepath, save=True ,project="static", name="predict", exist_ok=True)
+
                 filename='predict'+'/'+filename
                 counts={}
                 for results in results:
