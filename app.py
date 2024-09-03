@@ -36,9 +36,7 @@ def predict_img():
                 try:
                     f.save(filepath)
                     flash("Image uploaded successfully", 'success')
-                    image=Image.open(filepath,filename)
-                    image=image.resize((260,260))
-                    results = model.predict(image, save=True, project=app.config['PREDICT_FOLDER'], exist_ok=True)
+                    results = model.predict(filepath, save=True, project=app.config['PREDICT_FOLDER'], exist_ok=True)
                     predict_filename = 'predict/' + filename
                     counts={}
                     for results in results:
