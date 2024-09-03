@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 from werkzeug.utils import secure_filename
 from ultralytics import YOLO
+import torch
+torch.cuda.empty_cache()
 
 app = Flask(__name__)
 app.secret_key = 'hf7TZttb5L'
@@ -13,7 +15,9 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['PREDICT_FOLDER'], exist_ok=True)
 
 # Load the model once at startup
-model = YOLO('yolov5nu.pt')
+
+model = YOLO('yolov8-tiny.pt')
+model.cpu()
 
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'mp4'}
