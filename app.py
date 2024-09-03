@@ -35,23 +35,11 @@ def predict_img():
                 model=YOLO('best.pt')
 
                 filename='predict'+'/'+filename
-                counts={}
-                for results in results:
-                    boxes =results.boxes.cpu().numpy()
-                    for box in boxes:
-                        cls=int(box.cls[0])
-                        if not cls in counts.keys():
-                            counts[cls]=1
-                        else:
-                            counts[cls]+=1
-                    label=[]
-                    count=[]
-                    for key in counts.keys():
-                       label.append(model.names[key])
-                       count.append(str(counts[key]))
+            
+                
                               
                          
-                return render_template('index.html',filename=filename,label=label,count=count)
+                return render_template('index.html',filename=filename)
                 
             else:
                 flash('please upload file !','error')   
