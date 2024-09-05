@@ -17,8 +17,7 @@ os.makedirs(app.config['PREDICT_FOLDER'], exist_ok=True)
 
 
 
-model = YOLO('yolov5n.pt')
-model.cpu
+model = YOLO('yolov5nu.pt')
 
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'mp4'}
