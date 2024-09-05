@@ -17,7 +17,7 @@ os.makedirs(app.config['PREDICT_FOLDER'], exist_ok=True)
 
 
 
-model = YOLO('yolov8n.pt')
+model = YOLO('yolov5n.pt')
 model.cpu
 
 def allowed_file(filename):
